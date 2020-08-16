@@ -20,23 +20,19 @@ Item {
     BaseObject {
         id: _
 
-        //readonly property int scrubberXPosition: (_rectangleTrack.width - _rectangleScrubber.width) * (root.value / (root.maximumValue - root.minimumValue))
-
-        Connections {
+        Binding {
             target: _rectangleScrubber
-            onXChanged: {
-//                console.debug("x:" + _rectangleScrubber.x)
-                root.value = (_rectangleScrubber.x / (_rectangleTrack.width - _rectangleScrubber.width)* (root.maximumValue - root.minimumValue))
-//                console.debug("value: "+root.value)
-            }
+            property: "x"
+            value: (_rectangleTrack.width - _rectangleScrubber.width) * (root.value / (root.maximumValue - root.minimumValue))
+            when: !mouseArea.pressed
         }
 
-//        Binding {
-//            target: root
-//            property: "value"
-//            value: (_rectangleScrubber.x / (_rectangleTrack.width - _rectangleScrubber.width)* (root.maximumValue - root.minimumValue))
-//            when: !mouseArea.pressed
-//        }
+        Binding {
+            target: root
+            property: "value"
+            value: (_rectangleScrubber.x / (_rectangleTrack.width - _rectangleScrubber.width)* (root.maximumValue - root.minimumValue))
+            when: mouseArea.pressed
+        }
     }
 
     Rectangle {
@@ -50,8 +46,6 @@ Item {
 
     Rectangle {
         id: _rectangleScrubber
-        //x: _.scrubberXPosition
-
 
         width: parent.height / 2
         height: width
@@ -70,8 +64,6 @@ Item {
             drag.maximumX: _rectangleTrack.width - _rectangleScrubber.width
         }
     }
-
-
 }
 
 /*##^##
