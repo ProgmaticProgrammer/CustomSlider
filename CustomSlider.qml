@@ -5,12 +5,13 @@ Item {
     width: 200
     height: 40
 
-    Rectangle {
-        anchors.fill: parent
+    // debug
+//    Rectangle {
+//        anchors.fill: parent
 
-        border.color: "red"
-        border.width: 2
-    }
+//        border.color: "red"
+//        border.width: 2
+//    }
 
     property real value: 0.0
     property real minimumValue: 0.0
@@ -24,9 +25,9 @@ Item {
         Connections {
             target: _rectangleScrubber
             onXChanged: {
-                console.debug("x:" + x)
-                root.value = (x / (_rectangleTrack.width - _rectangleScrubber.width)* (root.maximumValue - root.minimumValue))
-                console.debug("value: "+root.value)
+//                console.debug("x:" + _rectangleScrubber.x)
+                root.value = (_rectangleScrubber.x / (_rectangleTrack.width - _rectangleScrubber.width)* (root.maximumValue - root.minimumValue))
+//                console.debug("value: "+root.value)
             }
         }
     }
