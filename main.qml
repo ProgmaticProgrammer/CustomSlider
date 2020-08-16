@@ -17,5 +17,7 @@ Window {
     Text {
         id: value
         text: Number(slider.value).toLocaleString(Qt.locale("de_DE"))
+        anchors.bottom: slider.top
+        anchors.horizontalCenter: parent.horizontalCenter
     }
 }
