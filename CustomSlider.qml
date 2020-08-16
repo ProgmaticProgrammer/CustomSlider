@@ -6,6 +6,32 @@ Item {
     height: 40
 
     Rectangle {
+        anchors.fill: parent
+
+        border.color: "red"
+        border.width: 2
+    }
+
+    property real value: 0.0
+    property real minimumValue: 0.0
+    property real maximumValue: 100.0
+
+    BaseObject {
+        id: _
+
+        readonly property int scrubberXPosition: (_rectangleTrack.width - _rectangleScrubber.width) * (root.value / (root.maximumValue - root.minimumValue))
+
+        Connections {
+            target: _rectangleScrubber
+            onXChanged: {
+                console.debug("x:" + x)
+                root.value = (x / (_rectangleTrack.width - _rectangleScrubber.width)* (root.maximumValue - root.minimumValue))
+                console.debug("value: "+root.value)
+            }
+        }
+    }
+
+    Rectangle {
         id: _rectangleTrack
         width: 200
         height: 4
@@ -16,6 +42,9 @@ Item {
 
     Rectangle {
         id: _rectangleScrubber
+        x: _.scrubberXPosition
+
+
         width: parent.height / 2
         height: width
         color: "#eeeeee"

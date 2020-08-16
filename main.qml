@@ -9,8 +9,13 @@ Window {
     title: qsTr("Hello World")
 
     CustomSlider {
+        id: slider
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
+    }
 
+    Text {
+        id: value
+        text: Number(slider.value).toLocaleString(Qt.locale("de_DE"))
     }
 }
