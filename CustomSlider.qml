@@ -20,7 +20,7 @@ Item {
     BaseObject {
         id: _
 
-        readonly property int scrubberXPosition: (_rectangleTrack.width - _rectangleScrubber.width) * (root.value / (root.maximumValue - root.minimumValue))
+        //readonly property int scrubberXPosition: (_rectangleTrack.width - _rectangleScrubber.width) * (root.value / (root.maximumValue - root.minimumValue))
 
         Connections {
             target: _rectangleScrubber
@@ -30,6 +30,13 @@ Item {
 //                console.debug("value: "+root.value)
             }
         }
+
+//        Binding {
+//            target: root
+//            property: "value"
+//            value: (_rectangleScrubber.x / (_rectangleTrack.width - _rectangleScrubber.width)* (root.maximumValue - root.minimumValue))
+//            when: !mouseArea.pressed
+//        }
     }
 
     Rectangle {
@@ -43,7 +50,7 @@ Item {
 
     Rectangle {
         id: _rectangleScrubber
-        x: _.scrubberXPosition
+        //x: _.scrubberXPosition
 
 
         width: parent.height / 2
